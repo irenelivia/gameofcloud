@@ -213,16 +213,3 @@ def gameofcloud(ndays, DIU, persistence, branching, Tns_branch):
         x[step + 1, :] = prolong_active_regions + x_fire
 
     return x, Tns, counter, trop_temp_saved
-
-
-def calc_corr(x, ndays, N_steps_day):
-    days = ndays
-    steps = N_steps_day
-    x_new = x.reshape((days, steps, pixels, pixels))
-    x_mean = x_new.mean(1)
-    corr = np.zeros(days)
-    for it in range(1, days):
-        x_mean_f0 = gaussian_filter(x_mean[it], sigma=1)
-        x_mean_f1 = gaussian_filter(x_mean[it - 1], sigma=1)
-        corr[it] = np.corrcoef(x_mean_f0.flatten(), x_mean_f1.flatten())[0, 1]
-    return corr
