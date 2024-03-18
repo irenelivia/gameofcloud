@@ -15,11 +15,15 @@ import time
 import matplotlib.animation as animation
 from scipy.optimize import curve_fit
 
-from GameOfCloud import pixels, N_steps_day, Ts
-
+import GameOfCloud
+from GameOfCloud import Ts, parameters
 
 
 def plot_gameofcloud(DIU, nsteps_day, ndays, Tns, x, trop_temp_saved):
+
+    (tau, D_h, cp_cooling, avg_Ts, amp_Ts, lifetime_rain, interaction, persistence_boost, pixels, 
+    event_heating, trop_cooling, delta_t, delta_x, alpha, kernel_diff, kernel, N_steps_day) = parameters()
+
     cps = Tns[:]*20 - np.mean(Tns*20,axis=(1,2))[:,None,None]
 
     fig = plt.figure(figsize=(20,16), dpi=200)
@@ -137,7 +141,7 @@ def plot_diurnalcycle(x, Tns, trop_temp_saved, x_ocean, Tns_ocean, trop_temp_sav
     rain_timeseries=np.mean(x, axis=(1,2))
     axs[1, 0].plot(np.mean(rain_timeseries[7*48:].reshape(-1, 48), axis=0), color='forestgreen')
 
-    axs[1, 0].set_ylabel('Fraction of Convective Pixels')
+    axs[1, 0].set_ylabel('Fraction of Pixels with Convection')
     axs[1, 0].set_xticks(np.linspace(0,48,4))
     axs[1, 0].set_xticklabels(['midnight', 'noon', '6pm', 'midnight'])
     axs[1, 0].set_ylim(-0.01,0.19)
@@ -180,6 +184,8 @@ def plot_one_pixel(Tns,trop_temp_saved,nsteps_day):
     return
 
 def calc_corr(x, ndays, N_steps_day):
+    (tau, D_h, cp_cooling, avg_Ts, amp_Ts, lifetime_rain, interaction, persistence_boost, pixels, 
+    event_heating, trop_cooling, delta_t, delta_x, alpha, kernel_diff, kernel, N_steps_day) = parameters()
     days = ndays
     steps = N_steps_day
     x_new = x.reshape((days, steps, pixels, pixels))

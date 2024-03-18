@@ -14,10 +14,14 @@ import matplotlib.pyplot as plt
 
 
 import GameOfCloud
-from GameOfCloud import N_steps_day, gameofcloud
+from GameOfCloud import parameters, gameofcloud
 from Plotting_GameOfCloud import calc_corr
 
 def ensemble_gameofcloud(ensemble_runs,days1,days2,daybranch1,daybranch2):
+
+    (tau, D_h, cp_cooling, avg_Ts, amp_Ts, lifetime_rain, interaction, persistence_boost, pixels, 
+    event_heating, trop_cooling, delta_t, delta_x, alpha, kernel_diff, kernel, N_steps_day) = parameters()
+
     ensemble_runs = ensemble_runs #10
     days1 = days1 #28
     days2 = days2 #42

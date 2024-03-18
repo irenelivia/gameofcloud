@@ -47,7 +47,6 @@ def parameters():
         1 - 4 * alpha
     ) * np.array([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
     kernel = (1 / 8) * np.array([[1, 1, 1], [1, 0, 1], [1, 1, 1]])
-    return tau, D_h, cp_cooling, avg_Ts, amp_Ts, lifetime_rain, interaction, persistence_boost, pixels, event_heating, trop_cooling, delta_t, delta_x, alpha, kernel_diff, kernel, N_steps_day
 
 
 # # The model
